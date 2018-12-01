@@ -17,7 +17,8 @@
   function itemcontroller(ShoppingListCheckOffService)
   {
     var controller= this;
-    controller.items = items;
+    //controller.items = items;
+    controller.items = ShoppingListCheckOffService.getItems();
 
     controller.buynow = function(itemindex)
     {
@@ -26,14 +27,21 @@
     }
   }
   
-  //although inject the service, there is no use in my case. Just follow the assignment rule.
+  //Without inject the service,it is working. But To follow the assignment rule to inject.
+  /*function shoppinglistcontroller()
+  {
+      var controller= this;
+      controller.items = bought_items;
+  }*/
+
+
   shoppinglistcontroller.$inject = ['ShoppingListCheckOffService'];
   function shoppinglistcontroller(ShoppingListCheckOffService)
   {
       var controller= this;
-      controller.items = bought_items;
+      controller.items = ShoppingListCheckOffService.getCheckOutItems();
   }
-  
+
 
   function ShoppingListCheckOffService()
   {
@@ -43,7 +51,17 @@
       {
          bought_items.push({name: item_name,quantity: item_quantity});
          items.splice(item_index,1);
-      }      
+      }   
+      
+      service.getItems = function()
+      {
+          return items;
+      }
+
+      service.getCheckOutItems = function()
+      {
+          return bought_items;
+      }
   }
 
 })();
