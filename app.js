@@ -1,5 +1,7 @@
 (function()
 {
+  'use strict';
+
   var items = [{ name: "cookies", quantity: 10},
                { name: "chocolates", quantity: 15},
                { name: "biscuits", quantity: 20},
